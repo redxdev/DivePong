@@ -11,5 +11,9 @@
     [GameState]
     public class PlayState : AbstractGameState
     {
+        public override void Start(IGameState previous)
+        {
+
+        }
     }
 }

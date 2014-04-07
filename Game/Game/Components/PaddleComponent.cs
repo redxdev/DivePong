@@ -12,9 +12,11 @@
     using SFML.Window;
     using SFML.Graphics;
 
-    [EntityComponent(Name = "Pong.PaddleColor", ExecutionLayer = EngineLayers.DrawGame)]
+    [EntityComponent(Name = "Pong.Paddle", ExecutionLayer = EngineLayers.DrawGame)]
     public class PaddleComponent : AbstractComponent
     {
+        private ComponentLookup<TransformComponent> transform = null;
+
         public Color PaddleColor
         {
             get;
@@ -27,19 +29,17 @@
             set;
         }
 
-        private ComponentLookup<TransformComponent> transform = null;
-
-        public PaddleComponent()
+        public override void Initialize()
         {
-            transform = new ComponentLookup<TransformComponent>(this.ParentEntity);
+            this.transform = new ComponentLookup<TransformComponent>(this.ParentEntity);
 
-            this.Paddle = new FloatRect(transform.Component.Position.X, transform.Component.Position.Y, 10, 50);
+            this.Paddle = new FloatRect(this.transform.Component.Position.X, this.transform.Component.Position.Y, 10, 100);
             this.PaddleColor = Color.White;
         }
 
         public override void Draw()
         {
-            this.Paddle = new FloatRect(transform.Component.Position.X, transform.Component.Position.Y, this.Paddle.Width, this.Paddle.Height);
+            this.Paddle = new FloatRect(this.transform.Component.Position.X, this.transform.Component.Position.Y, this.Paddle.Width, this.Paddle.Height);
 
             RectangleShape shape = new RectangleShape();
             shape.FillColor = this.PaddleColor;
