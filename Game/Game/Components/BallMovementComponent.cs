@@ -13,6 +13,7 @@
     using Dive.Util;
     using SFML.Window;
     using SFML.Graphics;
+    using Pong.Game.States;
 
     [EntityComponent(Name = "Pong.BallMovement", ExecutionLayer = EngineLayers.UpdatePhysics)]
     public class BallMovementComponent : AbstractComponent
@@ -59,8 +60,23 @@
                 this.Angle = -this.Angle;
             }
 
-            if (transform.Component.Position.X <= 0 || transform.Component.Position.X + this.ball.Component.Size >= GameEngine.Instance.Window.Size.X)
+            if (transform.Component.Position.X <= 0)
             {
+                PlayState.AIScore++;
+                GameEngine.Instance.EntityManager.RemoveEntity(this.ParentEntity);
+                GameEngine.Instance.Scheduler.ScheduleTask(new TaskInfo()
+                {
+                    ExecuteAfter = 2f,
+                    Task = () =>
+                    {
+                        GameEngine.Instance.EntityManager.CreateEntityFromTemplateWithName("Pong.Ball", "ball");
+                    }
+                });
+                return;
+            }
+            else if (transform.Component.Position.X + this.ball.Component.Size >= GameEngine.Instance.Window.Size.X)
+            {
+                PlayState.PlayerScore++;
                 GameEngine.Instance.EntityManager.RemoveEntity(this.ParentEntity);
                 GameEngine.Instance.Scheduler.ScheduleTask(new TaskInfo()
                 {
