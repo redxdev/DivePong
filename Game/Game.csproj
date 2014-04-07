@@ -7,8 +7,8 @@
     <ProjectGuid>{868CC6ED-C3A4-419E-96B7-871CC042FB93}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dive</RootNamespace>
-    <AssemblyName>Game</AssemblyName>
+    <RootNamespace>Pong</RootNamespace>
+    <AssemblyName>Pong</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
