@@ -12,8 +12,8 @@
     using SFML.Window;
     using SFML.Graphics;
 
-    [EntityComponent(Name = "Pong.PlayerInput", ExecutionLayer = EngineLayers.UpdateInput)]
-    public class PlayerInputComponent : AbstractComponent
+    [EntityComponent(Name = "Pong.AI", ExecutionLayer = EngineLayers.UpdatePhysicsPositions)]
+    public class AIComponent : AbstractComponent
     {
         private ComponentLookup<TransformComponent> transform = null;
         private ComponentLookup<PaddleComponent> paddle = null;
@@ -29,21 +29,27 @@
             this.transform = new ComponentLookup<TransformComponent>(this.ParentEntity);
             this.paddle = new ComponentLookup<PaddleComponent>(this.ParentEntity);
 
-            this.Speed = 300f;
+            this.Speed = 320f;
+            this.transform.Component.SetX(GameEngine.Instance.Window.Size.X - this.paddle.Component.Paddle.Width);
         }
 
         public override void Update()
         {
-            if (GameEngine.Instance.Input.IsActionActive("up"))
-            {
-                this.transform.Component.AddY(-(float)(this.Speed * GameEngine.Instance.Delta));
-            }
+            Entity ballEnt = GameEngine.Instance.EntityManager.GetEntityByName("ball");
+            if (ballEnt == null)
+                return;
 
-            if (GameEngine.Instance.Input.IsActionActive("down"))
+            TransformComponent ballTransform = ballEnt.GetComponent<TransformComponent>();
+
+            float middle = this.transform.Component.Position.Y + (this.paddle.Component.Paddle.Height / 2);
+            if (middle < ballTransform.Position.Y)
             {
                 this.transform.Component.AddY((float)(this.Speed * GameEngine.Instance.Delta));
             }
-
+            else if (middle > ballTransform.Position.Y)
+            {
+                this.transform.Component.AddY(-(float)(this.Speed * GameEngine.Instance.Delta));
+            }
 
             float y = this.transform.Component.Position.Y;
 

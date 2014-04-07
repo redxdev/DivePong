@@ -14,6 +14,10 @@
         public override void Start(IGameState previous)
         {
             GameEngine.Instance.ClearColor = ColorConstants.Black;
+
+            GameEngine.Instance.EntityManager.CreateEntityFromTemplateWithName("Pong.Player", "player");
+            GameEngine.Instance.EntityManager.CreateEntityFromTemplateWithName("Pong.AI", "ai");
+            GameEngine.Instance.EntityManager.CreateEntityFromTemplateWithName("Pong.Ball", "ball");
         }
     }
 }

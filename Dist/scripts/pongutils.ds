@@ -2,13 +2,20 @@
 alias(
 	spawn_ball,
 	[[
-		entity_create_template(Pong.Ball)
+		entity_create_template(Pong.Ball,ball)
 	]]
 )
 
 alias(
 	spawn_player,
 	[[
-		entity_create_template(Pong.Player)
+		entity_create_template(Pong.Player,player)
+	]]
+)
+
+alias(
+	spawn_ai,
+	[[
+		entity_create_template(Pong.AI,ai)
 	]]
 )
