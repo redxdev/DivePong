@@ -35,19 +35,37 @@
             this.transform = new ComponentLookup<TransformComponent>(this.ParentEntity);
             this.ball = new ComponentLookup<BallComponent>(this.ParentEntity);
 
-            this.Angle = (float)(90 * (Math.PI / 180));
-            this.Speed = 40f;
+            this.Angle = (float)(45 * (Math.PI / 180));
+            this.Speed = 400f;
         }
 
         public override void Update()
         {
-            if (transform.Component.Position.Y < 0 || transform.Component.Position.Y + this.ball.Component.Size > GameEngine.Instance.Window.Size.Y
-                || transform.Component.Position.X < 0 || transform.Component.Position.X + this.ball.Component.Size > GameEngine.Instance.Window.Size.X)
+            if (transform.Component.Position.Y <= 0 || transform.Component.Position.Y + this.ball.Component.Size >= GameEngine.Instance.Window.Size.Y)
             {
                 this.Angle = -this.Angle;
             }
 
-            this.transform.Component.AddPosition((float)(GameEngine.Instance.Delta * this.Speed * Math.Cos(this.Angle)), (float)(GameEngine.Instance.Delta * this.Speed * Math.Sin(this.Angle)));
+            if (transform.Component.Position.X <= 0 || transform.Component.Position.X + this.ball.Component.Size >= GameEngine.Instance.Window.Size.X)
+            {
+                this.Angle = -this.Angle;
+            }
+
+            Vector2f position = this.transform.Component.Position;
+            position.X += (float)(GameEngine.Instance.Delta * this.Speed * Math.Cos(this.Angle));
+            position.Y += (float)(GameEngine.Instance.Delta * this.Speed * Math.Sin(this.Angle));
+
+            if (position.Y < 0)
+                position.Y = 0;
+            else if (position.Y + this.ball.Component.Size > GameEngine.Instance.Window.Size.Y)
+                position.Y = GameEngine.Instance.Window.Size.Y - this.ball.Component.Size;
+
+            if (position.X < 0)
+                position.X = 0;
+            else if (position.X + this.ball.Component.Size > GameEngine.Instance.Window.Size.X)
+                position.X = GameEngine.Instance.Window.Size.X - this.ball.Component.Size;
+
+            this.transform.Component.Position = position;
         }
     }
 }
