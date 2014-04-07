@@ -56,9 +56,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Components\BallComponent.cs" />
+    <Compile Include="Game\Components\BallMovementComponent.cs" />
     <Compile Include="Game\Components\PaddleComponent.cs" />
     <Compile Include="Game\Components\PlayerInputComponent.cs" />
     <Compile Include="Game\States\PlayState.cs" />
+    <Compile Include="Game\Templates\BallTemplate.cs" />
     <Compile Include="Game\Templates\PlayerTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

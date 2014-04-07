@@ -13,7 +13,7 @@
     {
         public override void Start(IGameState previous)
         {
-
+            GameEngine.Instance.ClearColor = ColorConstants.Black;
         }
     }
 }
