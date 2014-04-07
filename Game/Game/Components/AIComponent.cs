@@ -29,7 +29,7 @@
             this.transform = new ComponentLookup<TransformComponent>(this.ParentEntity);
             this.paddle = new ComponentLookup<PaddleComponent>(this.ParentEntity);
 
-            this.Speed = 320f;
+            this.Speed = 300f;
             this.transform.Component.SetX(GameEngine.Instance.Window.Size.X - this.paddle.Component.Paddle.Width);
         }
 
