@@ -1,4 +1,4 @@
 # Dive Initialization Script
 echo("DScript", $s_version)
 
-# changestate(MyStartupGameState)
+changestate(Pong.Game.States.PlayState)

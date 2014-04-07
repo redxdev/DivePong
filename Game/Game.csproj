@@ -56,6 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Components\PaddleComponent.cs" />
+    <Compile Include="Game\States\PlayState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,8 +67,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Game\Components\" />
-    <Folder Include="Game\States\" />
     <Folder Include="Game\Templates\" />
   </ItemGroup>
   <ItemGroup>

@@ -5,8 +5,11 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Dive.Engine;
+    using Dive.Engine.Attributes;
 
-    public class PlayState
+    [GameState]
+    public class PlayState : AbstractGameState
     {
     }
 }
