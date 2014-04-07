@@ -12,7 +12,9 @@
     using Dive.Engine.Scheduler;
     using Dive.Entity;
     using Dive.Script;
+    using Dive.Util;
     using log4net;
+    using SFML.Window;
     using SFML.Graphics;
 
     /// <summary>
@@ -621,8 +623,12 @@
 
             this.Window.SetVerticalSyncEnabled(vsync);
 
+            View view = this.Window.GetView();
+            view.Center = new Vector2f(0, 0);
+            view.Size = new Vector2f(resW, resH);
+            this.Window.SetView(view);
+
             this.Window.Closed += this.OnWindowClosed;
-            this.Window.Resized += this.OnWindowResized;
 
 #if DEBUG
             string assemblyPath = "bin/Debug/";
@@ -677,7 +683,7 @@
 
             if (debugEnabled)
             {
-                Type debugHandlerType = Type.GetType(this.Configuration["debug"]["handler"]);
+                Type debugHandlerType = TypeUtilities.GetGlobalType(this.Configuration["debug"]["handler"]);
                 if (debugHandlerType == null)
                 {
                     Log.Fatal("Configuration: Unknown debug handler type \"" + this.Configuration["debug"]["handler"] + "\"");
@@ -725,18 +731,6 @@
         protected void OnWindowClosed(object sender, EventArgs e)
         {
             this.Window.Close();
-        }
-
-        /// <summary>
-        /// Called when the render window is resized.
-        /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event arguments.</param>
-        protected void OnWindowResized(object sender, SFML.Window.SizeEventArgs e)
-        {
-            View view = this.Window.GetView();
-            view.Size = new SFML.Window.Vector2f(e.Width, e.Height);
-            this.Window.SetView(view);
         }
 
         /// <summary>
