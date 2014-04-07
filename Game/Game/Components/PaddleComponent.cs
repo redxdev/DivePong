@@ -33,7 +33,7 @@
         {
             this.transform = new ComponentLookup<TransformComponent>(this.ParentEntity);
 
-            this.Paddle = new FloatRect(this.transform.Component.Position.X, this.transform.Component.Position.Y, 10, 100);
+            this.Paddle = new FloatRect(this.transform.Component.Position.X, this.transform.Component.Position.Y, 15, 100);
             this.PaddleColor = Color.White;
         }
 
