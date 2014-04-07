@@ -37,6 +37,8 @@
 
             this.Angle = (float)(45 * (Math.PI / 180));
             this.Speed = 400f;
+
+            this.transform.Component.SetPosition(300, 300);
         }
 
         public override void Update()
@@ -48,7 +50,8 @@
 
             if (transform.Component.Position.X <= 0 || transform.Component.Position.X + this.ball.Component.Size >= GameEngine.Instance.Window.Size.X)
             {
-                this.Angle = -this.Angle;
+                GameEngine.Instance.EntityManager.RemoveEntity(this.ParentEntity);
+                return;
             }
 
             Vector2f position = this.transform.Component.Position;
@@ -59,11 +62,6 @@
                 position.Y = 0;
             else if (position.Y + this.ball.Component.Size > GameEngine.Instance.Window.Size.Y)
                 position.Y = GameEngine.Instance.Window.Size.Y - this.ball.Component.Size;
-
-            if (position.X < 0)
-                position.X = 0;
-            else if (position.X + this.ball.Component.Size > GameEngine.Instance.Window.Size.X)
-                position.X = GameEngine.Instance.Window.Size.X - this.ball.Component.Size;
 
             this.transform.Component.Position = position;
         }
