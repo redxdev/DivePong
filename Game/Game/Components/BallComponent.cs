@@ -34,7 +34,7 @@
             this.transform = new ComponentLookup<TransformComponent>(this.ParentEntity);
 
             this.BallColor = Color.White;
-            this.Size = 50f;
+            this.Size = 25f;
         }
 
         public override void Draw()

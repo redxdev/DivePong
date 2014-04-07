@@ -1,0 +1,14 @@
+# A few small utilities for pong
+alias(
+	spawn_ball,
+	[[
+		entity_create_template(Pong.Ball)
+	]]
+)
+
+alias(
+	spawn_player,
+	[[
+		entity_create_template(Pong.Player)
+	]]
+)

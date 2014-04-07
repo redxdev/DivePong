@@ -1,4 +1,6 @@
 # Dive Initialization Script
 echo("DScript", $s_version)
 
+include(scripts/pongutils.ds)
+
 changestate(Pong.Game.States.PlayState)
