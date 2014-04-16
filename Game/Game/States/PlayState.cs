@@ -26,8 +26,8 @@
             set;
         }
 
-        private TextComponent playerText = null;
-        private TextComponent aiText = null;
+        private TextRendererComponent playerText = null;
+        private TextRendererComponent aiText = null;
 
         public override void Start(IGameState previous)
         {
@@ -38,7 +38,7 @@
             GameEngine.Instance.EntityManager.CreateEntityFromTemplateWithName("Pong.Ball", "ball");
 
             Entity playerScore = GameEngine.Instance.EntityManager.CreateEntityFromTemplateWithName("Engine.Spatial", "playerScore");
-            playerText = playerScore.AddComponent<TextComponent>();
+            playerText = playerScore.AddComponent<TextRendererComponent>();
 
             playerScore.GetComponent<TransformComponent>().SetPosition(GameEngine.Instance.Window.DefaultView.Center.X - 50, 30);
             playerText.DrawLayer = -1;
@@ -48,7 +48,7 @@
             playerText.Drawable.CharacterSize = 100;
 
             Entity aiScore = GameEngine.Instance.EntityManager.CreateEntityFromTemplateWithName("Engine.Spatial", "aiScore");
-            aiText = aiScore.AddComponent<TextComponent>();
+            aiText = aiScore.AddComponent<TextRendererComponent>();
 
             aiScore.GetComponent<TransformComponent>().SetPosition(GameEngine.Instance.Window.DefaultView.Center.X + 10, 30);
             aiText.DrawLayer = -1;
